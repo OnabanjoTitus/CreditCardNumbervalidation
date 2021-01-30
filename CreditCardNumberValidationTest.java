@@ -24,6 +24,7 @@ CreditCardNumberValidation creditCardNumberValidation;
         BigInteger creditCardNumber = creditCardNumberValidation.getCreditCardNumber();
         BigInteger cardNumber = new BigInteger("4388576018402626");
         assertEquals(cardNumber,creditCardNumber);
+
     }
     @Test
     void testThatLengthOfCreditCardNumberEnteredIsValidLength(){
@@ -35,5 +36,19 @@ CreditCardNumberValidation creditCardNumberValidation;
     void testThatCreditCardIsOfValidLength(){
         creditCardNumberValidation.setCreditCardNumber("4388576018402626");
         assertTrue(creditCardNumberValidation.IsValidCreditCardNumber());
+     }
+     @Test
+    void testForTheCreditCardType(){
+        creditCardNumberValidation.setCreditCardNumber("4388576018402626");
+        assertTrue(creditCardNumberValidation.IsVisaCard());
+
+        creditCardNumberValidation.setCreditCardNumber("5388576018402626");
+        assertTrue(creditCardNumberValidation.IsMastercard());
+
+        creditCardNumberValidation.setCreditCardNumber("6388576018402626");
+        assertTrue(creditCardNumberValidation.IsDiscovercard());
+
+         creditCardNumberValidation.setCreditCardNumber("3788576018402626");
+         assertTrue(creditCardNumberValidation.IsAmericanExpress());
      }
 }
