@@ -54,10 +54,9 @@ CreditCardNumberValidation creditCardNumberValidation;
      }
      @Test
     void testCreditCardEnteredIsAValidCard(){
-        creditCardNumberValidation.setCreditCardNumber("4388576018402626");
-        assertEquals(37,creditCardNumberValidation.getTotalResultOfSummationOfEverySecondDigitsFromLeftToRight());
-        assertEquals(38,creditCardNumberValidation.getTotalResultOfSummationOfEveryDigitsInOddPlacesFromRightToLeft());
+        creditCardNumberValidation.setCreditCardNumber("4388576018410707");
 
-//        assertTrue(creditCardNumberValidation.IsValidCreditCard());
+
+        assertTrue(creditCardNumberValidation.IsValidCreditCard());
      }
 }

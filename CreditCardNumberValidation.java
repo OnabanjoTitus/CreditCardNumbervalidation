@@ -8,9 +8,8 @@ public class CreditCardNumberValidation {
     private boolean masterCard;
     private boolean americanExpress;
     private boolean discoverCards;
-    private boolean validCreditCard;
-    private  char[] charray;
     private  int total;
+    private int total2;
     public void setCreditCardNumber(String creditCardNumber) {
         this.creditCardNumber = new BigInteger( creditCardNumber);
     }
@@ -81,18 +80,22 @@ public class CreditCardNumberValidation {
 
 
     public boolean IsValidCreditCard() {
-        validCreditCard = creditCardValidator(creditCardNumber.toString());
-        return validCreditCard;
+
+        return creditCardValidator();
     }
 
 
-    private boolean creditCardValidator(String creditCardNumber) {
-       BigInteger y = new BigInteger(creditCardNumber);
-       return false;
+    private boolean creditCardValidator() {
+       boolean cardValidator = false;
+       int results = getTotalResultOfSummationOfEveryDigitsInOddPlacesFromRightToLeft()+getTotalResultOfSummationOfEverySecondDigitsFromLeftToRight();
+       if(results%10==0){
+           cardValidator = true;
+       }
+       return cardValidator;
         }
 
-    private void sumOfEveryDoubleDigitFromLeftToRight(BigInteger charray){
-        String character = charray.toString();
+    private void sumOfEveryDoubleDigitFromLeftToRight(BigInteger creditCardNumber){
+        String character = creditCardNumber.toString();
         convertAllDigitsToCharToBeSummed(character);
     }
 
@@ -142,10 +145,45 @@ public class CreditCardNumberValidation {
 
     public int getTotalResultOfSummationOfEveryDigitsInOddPlacesFromRightToLeft() {
         sumOfEveryDoubleDigitFromRightToLeft(getCreditCardNumber());
-        
+        return total2;
+
     }
 
     private void sumOfEveryDoubleDigitFromRightToLeft(BigInteger creditCardNumber) {
+        String character = creditCardNumber.toString();
+        convertAllDigitsToCharToBeSummedFromRightToLeft(character);
+    }
+
+    private void convertAllDigitsToCharToBeSummedFromRightToLeft(String character) {
+        char[] characters = new char[character.length()];
+        for(int counter = 0; counter< character.length(); counter++){
+            characters[counter] = character.charAt(counter);
+        }
+        conversionOfAllCharactersIntoAStringForRightToLeft(characters);
+    }
+
+    private void conversionOfAllCharactersIntoAStringForRightToLeft(char[] characters) {
+        String integer= String.valueOf(characters);
+        sumOfDoubleSecondDigitsFromRightToLeft(integer);
+    }
+
+    private void sumOfDoubleSecondDigitsFromRightToLeft(String integer) {
+        int []  integers = new int[integer.length()];
+        resultOfSummationOfSecondDigitsFromRightToLeft(integer,integers);
+
+    }
+
+    private void resultOfSummationOfSecondDigitsFromRightToLeft(String integer, int[] integers) {
+        for(int counter = 0; counter<integers.length;counter++)
+        {
+            int integerValue = Integer.parseInt(String.valueOf(integer.charAt(counter)));
+            if(counter%2>0){
+                integers[counter]=integerValue;
+                    total2+=integers[counter];
+                continue;
+            }
+            integers[counter] =integerValue;
+        }
     }
 
 
