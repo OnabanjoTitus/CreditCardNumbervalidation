@@ -26,7 +26,7 @@ CreditCardNumberValidation creditCardNumberValidation;
         assertEquals(cardNumber,creditCardNumber);
     }
     @Test
-    void testThatLengthOfCreditCardNumberEnteredIsValid(){
+    void testThatLengthOfCreditCardNumberEnteredIsValidLength(){
         creditCardNumberValidation.setCreditCardNumber("4388576018402626");
         String cardNumber = "4388576018402626";
         assertEquals(cardNumber.length(),creditCardNumberValidation.creditCardNumberLength());
