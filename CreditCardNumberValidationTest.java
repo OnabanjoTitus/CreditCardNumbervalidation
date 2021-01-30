@@ -46,9 +46,18 @@ CreditCardNumberValidation creditCardNumberValidation;
         assertTrue(creditCardNumberValidation.IsMastercard());
 
         creditCardNumberValidation.setCreditCardNumber("6388576018402626");
-        assertTrue(creditCardNumberValidation.IsDiscovercard());
+        assertTrue(creditCardNumberValidation.IsDiscoverCard());
 
          creditCardNumberValidation.setCreditCardNumber("3788576018402626");
          assertTrue(creditCardNumberValidation.IsAmericanExpress());
+
+     }
+     @Test
+    void testCreditCardEnteredIsAValidCard(){
+        creditCardNumberValidation.setCreditCardNumber("4388576018402626");
+        assertEquals(37,creditCardNumberValidation.getTotalResultOfSummationOfEverySecondDigitsFromLeftToRight());
+        assertEquals(38,creditCardNumberValidation.getTotalResultOfSummationOfEveryDigitsInOddPlacesFromRightToLeft());
+
+//        assertTrue(creditCardNumberValidation.IsValidCreditCard());
      }
 }
