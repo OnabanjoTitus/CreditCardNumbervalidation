@@ -1,19 +1,26 @@
-package com.cohortFive.tdd;
+
 
 import java.math.BigInteger;
 
 public class CreditCardNumberValidation {
+    CreditCardTypeCheck creditCardTypeCheck = new CreditCardTypeCheck();
+    CreditCardValidLength cardValidity = new CreditCardValidLength();
+    CreditCardValidator creditCardValidity = new CreditCardValidator();
     private BigInteger creditCardNumber;
-    private boolean visaCard;
-    private boolean masterCard;
-    private boolean americanExpress;
-    private boolean discoverCards;
-    private  int total;
-    private int total2;
-    public void setCreditCardNumber(String creditCardNumber) {
-        this.creditCardNumber = new BigInteger( creditCardNumber);
-    }
+    private boolean validLength;
+    private boolean validation;
 
+    public void setCreditCardNumber(String creditCardNumber) {
+        this.creditCardNumber = new BigInteger(creditCardNumber);
+       validLength = IsValidCreditCardNumberLength(creditCardNumber);
+       validation = creditCardValidator();
+        creditCardTypeCheck.checkCardType(getCreditCardNumber());
+    }
+    public String getCreditCardType(){
+        String cardType;
+        cardType = creditCardTypeCheck.toString();
+        return cardType;
+    }
     public BigInteger getCreditCardNumber() {
         return creditCardNumber;
     }
@@ -21,172 +28,35 @@ public class CreditCardNumberValidation {
        int  creditCardNumberLength = creditCardNumber.toString().length();
        return creditCardNumberLength;
     }
-    public boolean IsValidCreditCardNumber(){
-        boolean validation = cardValidity(creditCardNumberLength());
-        return validation;
+    private boolean IsValidCreditCardNumberLength(String creditCardNumber){
+       boolean validLengthCheck = cardValidity.IsValidCreditCardNumber(creditCardNumber.length());
+        return  validLengthCheck ;
     }
-    private boolean cardValidity(int cardNumber){
-        boolean validity;
-        switch (cardNumber){
-            case 13,14,15,16->
-                 validity = true;
-            default ->
-                    validity = false;
+    private boolean creditCardValidator(){
+        return creditCardValidity.IsValidCreditCard(this.creditCardNumber);
+    }
+
+    @Override
+    public String toString() {
+        String cardDetails ="";
+        if(validLength){
+            cardDetails+=String.format("The card with the number %d is of valid length%n",getCreditCardNumber());
         }
-    return validity;
-    }
-    public boolean IsVisaCard() {
-      checkCardType(creditCardNumber);
-        return visaCard;
-    }
-    public boolean IsMastercard() {
-        checkCardType(creditCardNumber);
-        return masterCard;
-    }
-    public boolean IsDiscoverCard() {
-        checkCardType(creditCardNumber);
-        return discoverCards;
-    }
-    public boolean IsAmericanExpress() {
-        checkCardType(creditCardNumber);
-        return americanExpress;
-    }
-
-    private void checkCardType(BigInteger creditCardNumber) {
-
-        char number = caseCondition(creditCardNumber.toString());
-        switch (number){
-            case '4' ->
-                   visaCard = true;
-            case '5' ->
-                    masterCard = true;
-            case '6' ->
-                    discoverCards = true;
-            case '3' -> {
-                char output = americanExpressClause(creditCardNumber.toString());
-                        if(output == '7')
-                            americanExpress = true;
-            }
+        else{
+            cardDetails+=String.format("The card is of an invalid length%n");
         }
-
-    }
-    private char caseCondition(String input) {
-        return  input.charAt(0);
-    }
-    private char americanExpressClause(String input){
-        return input.charAt(1);
-
-    }
-
-
-    public boolean IsValidCreditCard() {
-
-        return creditCardValidator();
-    }
-
-
-    private boolean creditCardValidator() {
-       boolean cardValidator = false;
-       int results = getTotalResultOfSummationOfEveryDigitsInOddPlacesFromRightToLeft()+getTotalResultOfSummationOfEverySecondDigitsFromLeftToRight();
-       if(results%10==0){
-           cardValidator = true;
-       }
-       return cardValidator;
+        if(validation){
+            cardDetails+=String.format("The card is also a valid card%n");
+        }else{
+            cardDetails+=String.format("The card is an invalid card%n");
         }
-
-    private void sumOfEveryDoubleDigitFromLeftToRight(BigInteger creditCardNumber){
-        String character = creditCardNumber.toString();
-        convertAllDigitsToCharToBeSummed(character);
-    }
-
-
-    private void convertAllDigitsToCharToBeSummed(String character) {
-        char[] characters = new char[character.length()];
-        for(int counter = 0; counter< character.length(); counter++){
-            characters[counter] = character.charAt(counter);
+        if(validLength||validation){
+            cardDetails+=String.format("And the card is of type %s",getCreditCardType());
+        }else{
+            cardDetails+=String.format("The card is of an unknown type%n");
         }
-        conversionOfAllCharactersIntoAString(characters);
+        return cardDetails;
     }
-
-    private void conversionOfAllCharactersIntoAString(char[] characters) {
-        String integer= String.valueOf(characters);
-        sumOfDoubleSecondDigitsFromLeftToRight(integer);
-    }
-
-    private void sumOfDoubleSecondDigitsFromLeftToRight(String integer) {
-        int []  integers = new int[integer.length()];
-        resultOfSummationOfSecondDigitsFromLeftToRight(integer,integers);
-    }
-
-    private void resultOfSummationOfSecondDigitsFromLeftToRight(String integer, int[] integers) {
-        for(int counter = 0; counter<integers.length;counter++)
-        {
-            int integerValue = Integer.parseInt(String.valueOf(integer.charAt(counter)));
-            if(counter%2==0){
-                integers[counter]= integerValue *2;
-                if(integers[counter]<10)
-                    total+=integers[counter];
-                if(integers[counter]>=10){
-                    int a=integers[counter]/10;
-                    int b=integers[counter]%10;
-                    total+=a+b;
-                }
-                continue;
-            }
-            integers[counter] =integerValue;
-        }
-
-    }
-
-    public int getTotalResultOfSummationOfEverySecondDigitsFromLeftToRight(){
-        sumOfEveryDoubleDigitFromLeftToRight(getCreditCardNumber());
-        return total;
-    }
-
-    public int getTotalResultOfSummationOfEveryDigitsInOddPlacesFromRightToLeft() {
-        sumOfEveryDoubleDigitFromRightToLeft(getCreditCardNumber());
-        return total2;
-
-    }
-
-    private void sumOfEveryDoubleDigitFromRightToLeft(BigInteger creditCardNumber) {
-        String character = creditCardNumber.toString();
-        convertAllDigitsToCharToBeSummedFromRightToLeft(character);
-    }
-
-    private void convertAllDigitsToCharToBeSummedFromRightToLeft(String character) {
-        char[] characters = new char[character.length()];
-        for(int counter = 0; counter< character.length(); counter++){
-            characters[counter] = character.charAt(counter);
-        }
-        conversionOfAllCharactersIntoAStringForRightToLeft(characters);
-    }
-
-    private void conversionOfAllCharactersIntoAStringForRightToLeft(char[] characters) {
-        String integer= String.valueOf(characters);
-        sumOfDoubleSecondDigitsFromRightToLeft(integer);
-    }
-
-    private void sumOfDoubleSecondDigitsFromRightToLeft(String integer) {
-        int []  integers = new int[integer.length()];
-        resultOfSummationOfSecondDigitsFromRightToLeft(integer,integers);
-
-    }
-
-    private void resultOfSummationOfSecondDigitsFromRightToLeft(String integer, int[] integers) {
-        for(int counter = 0; counter<integers.length;counter++)
-        {
-            int integerValue = Integer.parseInt(String.valueOf(integer.charAt(counter)));
-            if(counter%2>0){
-                integers[counter]=integerValue;
-                    total2+=integers[counter];
-                continue;
-            }
-            integers[counter] =integerValue;
-        }
-    }
-
-
 }
 
 
