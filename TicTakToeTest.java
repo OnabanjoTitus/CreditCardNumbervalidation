@@ -74,13 +74,27 @@ class TicTakToeTest {
 
    }
    @Test
-    void testThatGameBoardCanBeDisplayedAfterValidatingWinnerOrEndOfGame(){
+   void testThatBoardMovementCanBeDisplayedAfterEachMove(){
        ticTakToe.startNewGame();
        ticTakToe.markASpot(1,1);
        ticTakToe.markASpot(2,2);
+       ticTakToe.markASpot(2,3);
+       ticTakToe.markASpot(3,2);
+       ticTakToe.markASpot(3,1);
+       ticTakToe.markASpot(1,2);
+       ticTakToe.markASpot(2,1);
+
+   }
+   @Test
+    void testThatGameBoardCanBeDisplayedAfterValidatingWinnerOrEndOfGame(){
+       ticTakToe.startNewGame();
+       ticTakToe.markASpot(1,2);
+       ticTakToe.markASpot(1,1);
+       ticTakToe.markASpot(1,3);
        ticTakToe.markASpot(2,1);
        ticTakToe.markASpot(3,2);
        ticTakToe.markASpot(3,1);
+       
        ticTakToe.WeHaveAWinner();
 
    }
