@@ -2,6 +2,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TicTakToeTest {
@@ -63,11 +65,23 @@ class TicTakToeTest {
    @Test
     void testThatGameCanBeWon(){
         ticTakToe.startNewGame();
-        ticTakToe.markASpot(3,1);
+        ticTakToe.markASpot(1,1);
+        ticTakToe.markASpot(2,2);
         ticTakToe.markASpot(2,1);
         ticTakToe.markASpot(3,2);
-        ticTakToe.markASpot(2,2);
-        ticTakToe.markASpot(3,3);
+        ticTakToe.markASpot(3,1);
         assertTrue(ticTakToe.WeHaveAWinner());
+
+   }
+   @Test
+    void testThatGameBoardCanBeDisplayedAfterValidatingWinnerOrEndOfGame(){
+       ticTakToe.startNewGame();
+       ticTakToe.markASpot(1,1);
+       ticTakToe.markASpot(2,2);
+       ticTakToe.markASpot(2,1);
+       ticTakToe.markASpot(3,2);
+       ticTakToe.markASpot(3,1);
+       ticTakToe.WeHaveAWinner();
+
    }
 }
