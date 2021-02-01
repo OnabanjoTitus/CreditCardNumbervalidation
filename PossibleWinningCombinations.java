@@ -4,10 +4,10 @@ public class PossibleWinningCombinations {
 
 
     public boolean isWinningCombinations(int [][]value){
-        boolean values;
+        boolean isValues;
         arraySortersForGameRules(value);
-        values=isPossibleWinningCombinations();
-        return values;
+        isValues=isPossibleWinningCombinations();
+        return isValues;
 
     }
 
@@ -24,49 +24,49 @@ public class PossibleWinningCombinations {
 
 
     private boolean isPossibleWinningCombinations() {
-        boolean validity=false;
+        boolean isValidity=false;
         if ((gameBoard[0][0])!=(0))
         {
             if(gameBoard[0][0]==gameBoard[1][0] &&   gameBoard[0][0]==gameBoard[2][0]){
-                validity=true;
+                isValidity=true;
             }
         }
         if ((gameBoard[0][1])!=(0))
         {
             if(gameBoard[0][1]==gameBoard[1][1] && gameBoard[0][1]==gameBoard[2][1])
-                validity=true;
+                isValidity=true;
         }
         if ((gameBoard[0][2])!=(0))
         {
             if(gameBoard[0][2]==gameBoard[1][2] && gameBoard[0][2]==gameBoard[2][2])
-                validity=true;
+                isValidity=true;
         }
         if ((gameBoard[0][0])!=(0))
         {
             if(gameBoard[0][0]==gameBoard[0][1] && gameBoard[0][0]==gameBoard[0][2])
-                validity=true;
+                isValidity=true;
         }
         if ((gameBoard[1][0])!=(0))
         {
             if(gameBoard[1][0]==gameBoard[1][1] && gameBoard[1][0]==gameBoard[1][2])
-                validity=true;
+                isValidity=true;
         }
         if ((gameBoard[2][0])!=(0))
         {
             if(gameBoard[2][0]==gameBoard[2][1] && gameBoard[2][0]==gameBoard[2][2])
-                validity=true;
+                isValidity=true;
         }
         if ((gameBoard[0][0])!=(0))
         {
             if(gameBoard[0][0]==gameBoard[1][1] && gameBoard[0][0]==gameBoard[2][2])
-                validity=true;
+                isValidity=true;
         }
         if ((gameBoard[0][2])!=(0))
         {
             if(gameBoard[0][2]==gameBoard[1][1] && gameBoard[0][2]==gameBoard[2][0])
-                validity=true;
+                isValidity=true;
         }
 
-        return validity;
+        return isValidity;
     }
 }

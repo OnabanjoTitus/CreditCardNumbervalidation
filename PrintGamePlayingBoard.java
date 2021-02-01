@@ -22,7 +22,7 @@ public class PrintGamePlayingBoard {
     }
 
     protected boolean isPossibleWinningCombination(){
-        boolean value= possibleWinningCombinations.isWinningCombinations(gameBoard);
-        return value;
+        boolean isValue= possibleWinningCombinations.isWinningCombinations(gameBoard);
+        return isValue;
     }
 }

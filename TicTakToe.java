@@ -13,68 +13,68 @@ public class TicTakToe {
     }
 
     public boolean isMarkASpot(int row, int column) {
-        boolean playCondition;
+        boolean isPlayCondition;
         int arrayRow = row - 1;
         int arrayColumn = column - 1;
-       playCondition= isSpotMarked(arrayRow, arrayColumn);
-       return playCondition;
+       isPlayCondition= isSpotMarked(arrayRow, arrayColumn);
+       return isPlayCondition;
     }
 
     private boolean isSpotMarked(int arrayRow, int arrayColumn) {
-    boolean playCondition = false;
+    boolean isPlayCondition = false;
         boolean emptySpace = isEmptySpace(arrayRow, arrayColumn);
         if (turnMonitor % 2 > 0) {
-            playCondition=isPlayer1PlayingConditions(emptySpace,arrayRow,arrayColumn);
+            isPlayCondition=isPlayer1PlayingConditions(emptySpace,arrayRow,arrayColumn);
         } else {
-            playCondition=isPlayer2PlayingConditions(emptySpace,arrayRow,arrayColumn);
+            isPlayCondition=isPlayer2PlayingConditions(emptySpace,arrayRow,arrayColumn);
         }
-    return playCondition;
+    return isPlayCondition;
 
     }
     private boolean isPlayer1PlayingConditions(boolean emptySpace,int arrayRow, int arrayColumn){
-        boolean playCondition = false;
+        boolean isPlayCondition = false;
         if (emptySpace) {
             chars[arrayRow][arrayColumn] =1;
-            playCondition=statusMessages();
+            isPlayCondition=statusMessages();
             turnMonitor += 1;
         } else {
             System.out.println("Space Occupied try another space");
         }
-        return playCondition;
+        return isPlayCondition;
     }
 
     private boolean isPlayer2PlayingConditions(boolean emptySpace,int arrayRow, int arrayColumn){
-        boolean playCondition = false;
+        boolean isPlayCondition = false;
         if (emptySpace) {
             chars[arrayRow][arrayColumn] = 8;
-            playCondition=  statusMessages();
+            isPlayCondition=  statusMessages();
             turnMonitor += 1;
 
         } else {
             System.out.println("Space Occupied try another space");
         }
-        return playCondition;
+        return isPlayCondition;
     }
 
     private boolean isEmptySpace(int arrayRow, int arrayColumn) {
-        boolean validity = false;
+        boolean isValid = false;
         if (chars[arrayRow][arrayColumn] == 0) {
-            validity = true;
+            isValid = true;
         }
-        return validity;
+        return isValid;
     }
 
 
     private boolean statusMessages() {
         printGameBoard.printGameBoard(chars);
-        boolean winnerMonitor =printGameBoard.isPossibleWinningCombination();
+        boolean isWinnerMonitor =printGameBoard.isPossibleWinningCombination();
 
-        if(winnerMonitor){
+        if(isWinnerMonitor){
             System.out.printf("The Game has been won by %s%n", (turnMonitor%2>0?"Player1":"Player2"));
         } else {
             System.out.println("The game has no winner yet");
         }
-    return winnerMonitor;
+    return isWinnerMonitor;
     }
 
 }
