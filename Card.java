@@ -1,18 +1,14 @@
 public class Card {
-    private static Card card = new Card();
-    private  String face;
-    private  String suit;
+private String faces;
+private String suits;
 
-    public static Card getInstance() {
-        return card;
-    }
-    public void setCards(String face,String suit){
-        this.suit=suit;
-        this.face=face;
+    public Card(String faces, String suits) {
+        this.faces = faces;
+        this.suits = suits;
     }
 
     @Override
     public String toString() {
-        return face +"of"+ suit;
+        return faces+ " of " +suits;
     }
 }

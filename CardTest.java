@@ -4,10 +4,15 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 class CardTest {
     Card card;
+    DeckOfCards deckOfCards;
 
     @BeforeEach
     void setUp() {
-        card = Card.getInstance();
+    String faces=null;
+    String suits=null;
+
+        card = new Card(suits,faces);
+        deckOfCards=DeckOfCards.getInstanceOfDeckOFCards();
     }
 
     @AfterEach
@@ -15,16 +20,25 @@ class CardTest {
         card =null;
     }
     @Test
-    void testThatTheSingleInstanceOfTheClassCardHasBeenCreated(){
-        String faces="";
-        String suits="";
-    card.setCards(faces,suits);
-    }
-    @Test
-    void testThatFacesAndSuitsHaveBeenCreated(){
+    void testThatClassCardHasBeenCreated(){
         String faces=null;
         String suits=null;
-        String cards= faces +"of"+ suits;
-        assertEquals(cards,card.toString());
+    assertEquals(faces+ " of " +suits,card.toString());
+    }
+    @Test
+    void testThatDeckOfCardsHasBeenCreated(){
+        assertEquals("done",deckOfCards.classCreation());
+    }
+    @Test
+    void testThatDeckOfCardsCanBePopulated(){
+        deckOfCards.populateDeckOfCards();
+       assertNotNull( deckOfCards.dealCard());
+    }
+    @Test
+    void testThatDeckOfCardsCanBeShuffled(){
+        deckOfCards.populateDeckOfCards();
+        Card deck[]={deckOfCards.dealCard()};
+        deckOfCards.shuffle();
+        assertNotEquals(deck,deckOfCards.dealCard());
     }
 }
