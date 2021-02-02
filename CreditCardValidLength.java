@@ -1,7 +1,13 @@
 public class CreditCardValidLength {
 
     public boolean IsValidCreditCardNumber(int creditCardNumberLength){
-        boolean validation = cardValidity(creditCardNumberLength);
+        boolean validation = false;
+        try { 
+            validation = cardValidity(creditCardNumberLength);
+           
+        }catch (Throwable throwable){
+            System.err.println("Enter the correct value");
+        }
         return validation;
     }
     private boolean cardValidity(int cardNumber){

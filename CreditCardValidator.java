@@ -5,7 +5,11 @@ public class CreditCardValidator {
     private int total2;
     private BigInteger creditCardNumber;
     public boolean IsValidCreditCard(BigInteger creditCardNumber) {
-       this.creditCardNumber = creditCardNumber;
+        try{
+       this.creditCardNumber = creditCardNumber;}
+        catch (Throwable throwable){
+            System.out.println("Enter a valid match");
+        }
         return creditCardValidator();
     }
 
@@ -58,7 +62,7 @@ public class CreditCardValidator {
                     int b=integers[counter]%10;
                     total+=a+b;
                 }
-                continue;
+
             }
             integers[counter] =integerValue;
         }

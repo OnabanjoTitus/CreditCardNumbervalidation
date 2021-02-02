@@ -11,10 +11,13 @@ public class CreditCardNumberValidation {
     private boolean validation;
 
     public void setCreditCardNumber(String creditCardNumber) {
-        this.creditCardNumber = new BigInteger(creditCardNumber);
-       validLength = IsValidCreditCardNumberLength(creditCardNumber);
-       validation = creditCardValidator();
-        creditCardTypeCheck.checkCardType(getCreditCardNumber());
+        try{this.creditCardNumber = new BigInteger(creditCardNumber);
+        validLength = IsValidCreditCardNumberLength(creditCardNumber);
+        validation = creditCardValidator();
+        creditCardTypeCheck.checkCardType(getCreditCardNumber());}
+        catch (Throwable throwable){
+            System.err.println("Enter the card number in the correct format");
+        }
     }
     public String getCreditCardType(){
         String cardType;
@@ -22,6 +25,7 @@ public class CreditCardNumberValidation {
         return cardType;
     }
     public BigInteger getCreditCardNumber() {
+
         return creditCardNumber;
     }
     public  int creditCardNumberLength(){

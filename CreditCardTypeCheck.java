@@ -27,22 +27,23 @@ public class CreditCardTypeCheck {
     }
 
     public void checkCardType(BigInteger CardNumber) {
-        creditCardNumber = CardNumber;
-        char number = caseCondition(creditCardNumber.toString());
-        switch (number){
-            case '4' ->
-                    visaCard = true;
-            case '5' ->
-                    masterCard = true;
-            case '6' ->
-                    discoverCards = true;
-            case '3' -> {
-                char output = americanExpressClause(creditCardNumber.toString());
-                if(output == '7')
-                    americanExpress = true;
-            }
-        }
+     try {
+         creditCardNumber = CardNumber;
 
+         char number = caseCondition(creditCardNumber.toString());
+         switch (number) {
+             case '4' -> visaCard = true;
+             case '5' -> masterCard = true;
+             case '6' -> discoverCards = true;
+             case '3' -> {
+                 char output = americanExpressClause(creditCardNumber.toString());
+                 if (output == '7')
+                     americanExpress = true;
+             }
+         }
+     }catch (Throwable throwable){
+         System.out.println("Enter the correct number");
+     }
     }
     private char caseCondition(String input) {
         return  input.charAt(0);
