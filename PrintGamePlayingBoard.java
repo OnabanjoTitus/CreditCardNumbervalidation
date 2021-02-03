@@ -1,3 +1,5 @@
+import java.util.InputMismatchException;
+
 public class PrintGamePlayingBoard {
 
     private final int [][]gameBoard=new int[3][3];
@@ -5,14 +7,18 @@ public class PrintGamePlayingBoard {
 
     public void printGameBoard(char[][]chars) {
 
-        for(int row= 0;row<3;row++){
-            for(int column=0;column<3;column++){
-              boardPrinter(chars,row,column);
-            }
+       try {
+           for(int row= 0;row<3;row++){
+               for(int column=0;column<3;column++){
+                   boardPrinter(chars,row,column);
+               }
 
-            System.out.println();
+               System.out.println();
 
-        }
+           }
+       }catch (InputMismatchException inputMismatchException){
+           System.err.println("Invalid input");
+       }
 
     }
 

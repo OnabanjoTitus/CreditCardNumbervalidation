@@ -1,3 +1,5 @@
+import java.util.InputMismatchException;
+
 public class TicTakToe {
     private char[][] chars;
     private int turnMonitor = 1;
@@ -13,10 +15,16 @@ public class TicTakToe {
     }
 
     public boolean isMarkASpot(int row, int column) {
-        boolean isPlayCondition;
-        int arrayRow = row - 1;
+        boolean isPlayCondition = false;
+        try{int arrayRow = row - 1;
         int arrayColumn = column - 1;
-       isPlayCondition= isSpotMarked(arrayRow, arrayColumn);
+       isPlayCondition= isSpotMarked(arrayRow, arrayColumn);}
+        catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException){
+            System.err.printf("Array index entered is out of bound for a row %d of column %d in a 3 by 3 array",row,column);
+        }
+        catch (InputMismatchException inputMismatchException){
+            System.err.println("That is not a valid type of array index");
+        }
        return isPlayCondition;
     }
 

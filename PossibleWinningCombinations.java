@@ -1,23 +1,30 @@
+import java.util.InputMismatchException;
+
 public class PossibleWinningCombinations {
     private  int [][]gameBoard=new int[3][3];
 
 
 
     public boolean isWinningCombinations(int [][]value){
-        boolean isValues;
-        arraySortersForGameRules(value);
-        isValues=isPossibleWinningCombinations();
+        boolean isValues = false;
+       try{ arraySortersForGameRules(value);
+        isValues=isPossibleWinningCombinations();}
+       catch (InputMismatchException inputMismatchException){
+           System.err.println("Invalid input");
+       }
         return isValues;
 
     }
 
 
     private void arraySortersForGameRules(int [][]value){
-
-        for(int row= 0;row<3;row++){
+        try{
+            for(int row= 0;row<3;row++){
             for(int column=0;column<3;column++){
-                gameBoard[row][column]= value[row][column];
+                gameBoard[row][column]= value[row][column];}
             }
+        }catch (InputMismatchException inputMismatchException){
+            System.err.println("Invalid input");
         }
     }
 
