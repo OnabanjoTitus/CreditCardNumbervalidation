@@ -1,10 +1,17 @@
+import java.util.InputMismatchException;
+
 public class Card {
 private String faces;
 private String suits;
 
     public Card(String faces, String suits) {
-        this.faces = faces;
-        this.suits = suits;
+       try {
+           this.faces = faces;
+
+        this.suits = suits;}
+       catch (InputMismatchException inputMismatchException){
+           System.err.println("Invalid input entered");
+       }
     }
 
     @Override

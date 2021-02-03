@@ -39,9 +39,9 @@ public class DeckOfCards {
     }
     public Card dealCard(){
          if (currentCard < deck.length)
-             return deck[currentCard++]; // return current Card in array
+             return deck[currentCard++];
          else
-        return null; // return null to indicate that all Cards were dealt
+        return null;
          }
 }
 
